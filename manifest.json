@@ -6,10 +6,15 @@
   "homepage_url": "https://github.com/dbkaplun/github-markdown-outline-extension",
   "author": "Dan Kaplun <dbkaplun@gmail.com>",
   "icons": {},
-  "content_scripts": [
-    {
-      "matches": ["https://github.com/*"],
-      "js": ["index.js"]
-    }
+  "content_scripts": [{
+    "matches": ["https://github.com/*"],
+    "js": ["index.js"]
+  }],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage"
   ]
 }
