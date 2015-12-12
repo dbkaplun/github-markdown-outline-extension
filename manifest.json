@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Github Markdown Outline Extension",
-  "description": "Automatically add an outline to the top of Markdown documents in Github",
+  "description": "Show an outline for Markdown documents in Github",
   "version": "1.0.0",
   "homepage_url": "https://github.com/dbkaplun/github-markdown-outline-extension",
   "author": "Dan Kaplun <dbkaplun@gmail.com>",
