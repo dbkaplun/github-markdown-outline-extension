@@ -4,31 +4,39 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     var $useInnerHTML = document.querySelector('[name="useInnerHTML"]')
+    var $fixed = document.querySelector('[name="fixed"]')
     var $status = document.querySelector('#status')
     var initStatusTextContent = $status.textContent
-    var timeout
+    var statusShowTimeout
 
     function saveOptions () {
       var useInnerHTML = $useInnerHTML.checked
+      var fixed = $fixed.checked
       chrome.storage.sync.set({
-        useInnerHTML: useInnerHTML
+        useInnerHTML: useInnerHTML,
+        fixed: fixed
       }, function () {
         $status.textContent = "Options saved."
-        if (timeout) clearTimeout(timeout)
-        timeout = setTimeout(function () { $status.textContent = initStatusTextContent }, STATUS_SHOW_MS)
+        if (statusShowTimeout) clearTimeout(statusShowTimeout)
+        statusShowTimeout = setTimeout(function () { $status.textContent = initStatusTextContent }, STATUS_SHOW_MS)
       })
     }
 
     function restoreOptions () {
       chrome.storage.sync.get({
         // default values
-        useInnerHTML: true
+        useInnerHTML: true,
+        fixed: true
       }, function (options) {
         $useInnerHTML.checked = options.useInnerHTML
+        $fixed.checked = options.fixed
       })
     }
 
-    $useInnerHTML.addEventListener('change', function (evt) { saveOptions() })
+    [$useInnerHTML, $fixed].forEach(function ($input) {
+      $input.addEventListener('change', function (evt) { saveOptions() })
+    })
+
     restoreOptions()
   })
 }(this))

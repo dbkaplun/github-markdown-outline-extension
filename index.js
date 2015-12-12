@@ -18,11 +18,13 @@
 
   root.chrome.storage.sync.get({
     // default values
-    useInnerHTML: true
+    useInnerHTML: true,
+    fixed: true
   }, function (options) {
     toArray(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
       var $outline = $md.insertBefore(document.createElement('ul'), $md.firstElementChild)
-      $outline.className = '__github-markdown-outline'
+      $outline.classList.add('__github-markdown-outline')
+      if (options.fixed) $outline.classList.add('__github-markdown-outline--fixed')
       toArray($md.querySelectorAll(headerSel)).forEach(function ($h) {
         var level = getHeaderLevel($h)
         if (!level) return
