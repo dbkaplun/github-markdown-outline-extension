@@ -22,6 +22,7 @@
   }, function (options) {
     toArray(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
       var $outline = $md.insertBefore(document.createElement('ul'), $md.firstElementChild)
+      $outline.className = '__github-markdown-outline'
       toArray($md.querySelectorAll(headerSel)).forEach(function ($h) {
         var level = getHeaderLevel($h)
         if (!level) return
