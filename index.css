@@ -1,0 +1,8 @@
+@media (min-width: 1380px) { /* content container's min-width is 980px so 200px on each side is 1380 */
+  .__github-markdown-outline {
+    position: fixed;
+    width: 200px;
+    top: 168px;
+    left: 0;
+  }
+}

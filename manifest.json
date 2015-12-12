@@ -8,7 +8,8 @@
   "icons": {},
   "content_scripts": [{
     "matches": ["https://github.com/*"],
-    "js": ["index.js"]
+    "js": ["index.js"],
+    "css": ["index.css"]
   }],
   "options_ui": {
     "page": "options.html",
