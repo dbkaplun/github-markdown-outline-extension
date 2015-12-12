@@ -10,11 +10,9 @@
     var statusShowTimeout
 
     function saveOptions () {
-      var useInnerHTML = $useInnerHTML.checked
-      var fixed = $fixed.checked
       chrome.storage.sync.set({
-        useInnerHTML: useInnerHTML,
-        fixed: fixed
+        useInnerHTML: $useInnerHTML.checked,
+        fixed: $fixed.checked
       }, function () {
         $status.textContent = "Options saved."
         if (statusShowTimeout) clearTimeout(statusShowTimeout)
