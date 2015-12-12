@@ -1,5 +1,5 @@
 @media (min-width: 1380px) { /* content container's min-width is 980px so 200px on each side is 1380 */
-  .__github-markdown-outline {
+  body:not(.split-diff) .__github-markdown-outline.__github-markdown-outline--fixed {
     position: fixed;
     width: 200px;
     top: 168px;
