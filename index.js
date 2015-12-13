@@ -14,18 +14,26 @@
   var headerSels = []
   for (var l = 1; l <= 6; l++) headerSels.push('h'+l)
   var headerSel = headerSels.join(', ')
-  var linkSel = 'a[id]'
+  var anchorSel = 'a[id]'
+  var linkSel = 'a[href^="#"]'
 
   root.chrome.storage.sync.get({
     // default values
-    useInnerHTML: true,
-    fixed: true
+    hideIfOutlineDetected: true,
+    fixed: true,
+    useInnerHTML: true
   }, function (options) {
     toArray(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
-      var $outline = $md.insertBefore(document.createElement('ul'), $md.firstElementChild)
+      var $headers = toArray($md.querySelectorAll(headerSel))
+
+      if (options.hideIfOutlineDetected && toArray($md.querySelectorAll('p,ul')).some(function ($parent) {
+        return $parent.querySelectorAll(linkSel).length * 2 >= $headers.length
+      })) return // there's already an outline in the document
+
+      var $outline = document.createElement('ul')
       $outline.classList.add('__github-markdown-outline')
       if (options.fixed) $outline.classList.add('__github-markdown-outline--fixed')
-      toArray($md.querySelectorAll(headerSel)).forEach(function ($h) {
+      $headers.forEach(function ($h) {
         var level = getHeaderLevel($h)
         if (!level) return
         var $ul = $outline, $li, $child
@@ -41,13 +49,14 @@
           .appendChild(document.createElement('a'))
         if (options.useInnerHTML) {
           $topic.innerHTML = $h.innerHTML
-          $child = $topic.querySelector(linkSel)
+          $child = $topic.querySelector(anchorSel)
           if ($child) $topic.removeChild($child)
         } else {
           $topic.innerText = $h.innerText
         }
-        $topic.href = '#'+$h.querySelector(linkSel).id
+        $topic.href = '#'+$h.querySelector(anchorSel).id
       })
+      $md.insertBefore($outline, $md.firstElementChild)
     })
   })
 }(this))
