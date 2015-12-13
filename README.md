@@ -9,6 +9,12 @@ Displays a clickable outline of all headers in a Markdown document in Github on 
 
 ![Screenshot](https://raw.githubusercontent.com/dbkaplun/github-markdown-outline-extension/master/screenshot.png)
 
+## Installation
+
+Install via [Chrome Web Store](https://chrome.google.com/webstore/detail/github-markdown-outline-e/gccinjjdbfdkkkebfbeipopijjfohfgj)
+
 ## Usage
+
+When you visit any page on Github with markdown, this extension will automatically add a clickable outline, either fixed to the side of the page, or within the document itself.
 
 To see all available options, copy and paste the following URL into Chrome: `chrome://extensions/?options=gccinjjdbfdkkkebfbeipopijjfohfgj`
