@@ -20,7 +20,7 @@
   root.chrome.storage.sync.get({
     // default values
     hideIfOutlineDetected: true,
-    fixed: true,
+    float: true,
     useInnerHTML: true
   }, function (options) {
     toArray(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
@@ -32,7 +32,7 @@
 
       var $outline = document.createElement('ul')
       $outline.classList.add('__github-markdown-outline')
-      if (options.fixed) $outline.classList.add('__github-markdown-outline--fixed')
+      if (options.float) $outline.classList.add('__github-markdown-outline--float')
       $headers.forEach(function ($h) {
         var level = getHeaderLevel($h)
         if (!level) return

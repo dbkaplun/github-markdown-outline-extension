@@ -4,7 +4,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     var $useInnerHTML = document.querySelector('[name="useInnerHTML"]')
-    var $fixed = document.querySelector('[name="fixed"]')
+    var $float = document.querySelector('[name="float"]')
     var $hideIfOutlineDetected = document.querySelector('[name="hideIfOutlineDetected"]')
     var $status = document.querySelector('#status')
     var initStatusTextContent = $status.textContent
@@ -13,7 +13,7 @@
     function saveOptions () {
       chrome.storage.sync.set({
         useInnerHTML: $useInnerHTML.checked,
-        fixed: $fixed.checked,
+        float: $float.checked,
         hideIfOutlineDetected: $hideIfOutlineDetected.checked
       }, function () {
         $status.textContent = "Options saved."
@@ -26,16 +26,16 @@
       chrome.storage.sync.get({
         // default values
         useInnerHTML: true,
-        fixed: true,
+        float: true,
         hideIfOutlineDetected: true
       }, function (options) {
         $useInnerHTML.checked = options.useInnerHTML
-        $fixed.checked = options.fixed
+        $float.checked = options.float
         $hideIfOutlineDetected.checked = options.hideIfOutlineDetected
       })
     }
 
-    [$useInnerHTML, $fixed, $hideIfOutlineDetected].forEach(function ($input) {
+    [$useInnerHTML, $float, $hideIfOutlineDetected].forEach(function ($input) {
       $input.addEventListener('change', function (evt) { saveOptions() })
     })
 
