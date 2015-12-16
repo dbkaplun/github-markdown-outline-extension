@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Github Markdown Outline Extension",
-  "description": "Show an outline for Markdown documents in Github",
+  "description": "Displays a clickable outline of all topic headers for markdown documents on Github",
   "version": "1.2.0",
   "homepage_url": "https://github.com/dbkaplun/github-markdown-outline-extension",
   "author": "Dan Kaplun <dbkaplun@gmail.com>",

@@ -1,20 +1,23 @@
 Github Markdown Outline Extension 
 ======
-Download and Install via [Chrome Web Store](https://chrome.google.com/webstore/detail/github-markdown-outline-e/gccinjjdbfdkkkebfbeipopijjfohfgj)
-
-Displays a clickable outline of all headers in a Markdown document in Github on the left, which follows you down the page.
-
-* Assists in reading documentation on Github.
-* Fixed box follows you around while you're on the front page. (Optionally move the outline into the markdown document itself.)
+Displays a clickable outline of all topic headers for markdown documents on Github &mdash; *Install via [Chrome Web Store](https://chrome.google.com/webstore/detail/github-markdown-outline-e/gccinjjdbfdkkkebfbeipopijjfohfgj).*
 
 ![Screenshot](https://raw.githubusercontent.com/dbkaplun/github-markdown-outline-extension/master/screenshot.png)
 
 ## Installation
 
-Install via [Chrome Web Store](https://chrome.google.com/webstore/detail/github-markdown-outline-e/gccinjjdbfdkkkebfbeipopijjfohfgj)
+Install via [Chrome Web Store](https://chrome.google.com/webstore/detail/github-markdown-outline-e/gccinjjdbfdkkkebfbeipopijjfohfgj).
 
 ## Usage
 
-When you visit any page on Github with markdown, this extension will automatically add a clickable outline, either fixed to the side of the page, or within the document itself.
+When you visit any page with markdown on Github, this extension will automatically display a clickable outline near the top of the markdown document.
 
 To see all available options, copy and paste the following URL into Chrome: `chrome://extensions/?options=gccinjjdbfdkkkebfbeipopijjfohfgj`
+
+## Development
+
+* `git clone git@github.com:dbkaplun/github-markdown-outline-extension.git`
+* Go to `chrome://extensions` in Chrome
+* Click *Load unpacked extension...*
+* Select the `github-markdown-outline-extension` directory you just cloned
+* Make sure the extension was added by refreshing this page
