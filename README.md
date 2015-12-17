@@ -18,7 +18,7 @@ To see all available options, copy and paste the following URL into Chrome: `chr
 
 * `git clone git@github.com:dbkaplun/github-markdown-outline-extension.git`
 * Go to `chrome://extensions` in Chrome
-* Click the *Developer mode* checkbox
+* Ensure the *Developer mode* checkbox is clicked
 * Click the *Load unpacked extension...* button
 * Select the `github-markdown-outline-extension` directory you just cloned
 * Make sure the extension was added by refreshing this page
