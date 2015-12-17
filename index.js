@@ -21,7 +21,8 @@
     // default values
     hideIfOutlineDetected: true,
     float: true,
-    useInnerHTML: true
+    useInnerHTML: true,
+    normalize: true
   }, function (options) {
     toArray(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
       var $headers = toArray($md.querySelectorAll(headerSel))
@@ -33,9 +34,11 @@
       var $outline = document.createElement('ul')
       $outline.classList.add('__github-markdown-outline')
       if (options.float) $outline.classList.add('__github-markdown-outline--float')
+      var lastLevel = 1
       $headers.forEach(function ($h) {
         var level = getHeaderLevel($h)
         if (!level) return
+        if (options.normalize) level = Math.min(level, lastLevel + 1)
         var $ul = $outline, $li, $child
         for (var l = 1; l < level; l++) {
           $li = $ul.lastElementChild || $ul.appendChild(document.createElement('li'))
@@ -55,6 +58,7 @@
           $topic.innerText = $h.innerText
         }
         $topic.href = '#'+$h.querySelector(anchorSel).id
+        lastLevel = level
       })
       $md.insertBefore($outline, $md.firstElementChild)
     })
