@@ -1,10 +1,6 @@
 (function (root) {
   var document = root.document
 
-  function toArray (nodeList) {
-    return [].slice.call(nodeList)
-  }
-
   getHeaderLevel.REGEXP = /h(\d)/i
   function getHeaderLevel ($h) {
     var level = Number(((($h || {}).tagName || '').match(getHeaderLevel.REGEXP) || [])[1])
@@ -24,10 +20,10 @@
     useInnerHTML: true,
     normalize: true
   }, function (options) {
-    toArray(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
-      var $headers = toArray($md.querySelectorAll(headerSel))
+    Array.from(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
+      var $headers = Array.from($md.querySelectorAll(headerSel))
 
-      if (options.hideIfOutlineDetected && toArray($md.querySelectorAll('p,ul')).some(function ($parent) {
+      if (options.hideIfOutlineDetected && Array.from($md.querySelectorAll('p,ul')).some(function ($parent) {
         return $parent.querySelectorAll(linkSel).length * 2 >= $headers.length
       })) return // there's already an outline in the document
 
