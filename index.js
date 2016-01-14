@@ -61,21 +61,17 @@
       })
 
       // find all sublists with one item and replace with contents
-      if (options.normalize) (function normalize ($ul) {
-        var $parent = $ul.parentNode
+      if (options.normalize) Array.from($container.querySelectorAll('ul')).forEach($ul => {
         var $li = $ul.firstChild
-        var isLiOnlyChild = $li === $ul.lastChild && $ul !== $outline
-        while ($li) {
-          var $child = $li.firstChild
-          while ($child) {
-            if ($child.tagName === 'UL') normalize($child)
-            if (isLiOnlyChild) $parent.insertBefore($child, $ul.nextSibling) // inserts to end of list if $ul.nextSibling is null
-            $child = $child.nextSibling
-          }
-          if (isLiOnlyChild) $parent.removeChild($ul)
-          $li = $li.nextSibling
+        if ($li !== $ul.lastChild) return
+        var $parent = $ul.parentNode
+        var $child = $li.firstChild
+        while ($child) {
+          $parent.insertBefore($child, $ul.nextSibling) // inserts to end of list if $ul.nextSibling is null
+          $child = $child.nextSibling
         }
-      })($outline)
+        $parent.removeChild($ul)
+      })
 
       $md.insertBefore($container, $md.firstChild)
     })
