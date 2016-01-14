@@ -11,7 +11,7 @@
   for (var l = 1; l <= 6; l++) headerSels.push('h'+l)
   var headerSel = headerSels.join(', ')
   var anchorSel = 'a[id]'
-  var linkSel = 'a[href^="#"]'
+  var linkSel = 'a[href^="#"]:not(.anchor)'
 
   root.chrome.storage.sync.get({
     // default values
@@ -22,9 +22,7 @@
     Array.from(document.querySelectorAll('.markdown-body')).forEach($md => {
       var $headers = Array.from($md.querySelectorAll(headerSel))
 
-      if (options.hideIfOutlineDetected && Array
-        .from($md.querySelectorAll('p,ul'))
-        .some($parent => $parent.querySelectorAll(linkSel).length * 2 >= $headers.length)) return // there's already an outline in the document
+      if (options.hideIfOutlineDetected && $md.querySelectorAll(linkSel).length * 2 >= $headers.length) return // there's already an outline in the document
 
       var $container = document.createElement('div')
       $container.classList.add('__github-markdown-outline-container')
