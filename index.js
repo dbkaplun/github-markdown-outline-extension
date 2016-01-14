@@ -22,7 +22,7 @@
     Array.from(document.querySelectorAll('.markdown-body')).forEach($md => {
       var $headers = Array.from($md.querySelectorAll(headerSel))
 
-      if (options.hideIfOutlineDetected && $md.querySelectorAll(linkSel).length * 2 >= $headers.length) return // there's already an outline in the document
+      if (options.hideIfOutlineDetected && $md.querySelectorAll(linkSel).length + 5 >= $headers.length) return // there's already an outline in the document
 
       var $container = document.createElement('div')
       $container.classList.add('__github-markdown-outline-container')
