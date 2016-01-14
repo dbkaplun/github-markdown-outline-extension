@@ -63,7 +63,7 @@
       // find all sublists with one item and replace with contents
       if (options.normalize) Array.from($container.querySelectorAll('ul')).forEach($ul => {
         var $li = $ul.firstChild
-        if ($li !== $ul.lastChild) return
+        if ($li !== $ul.lastChild || $li.lastChild.tagName !== 'UL') return
         var $parent = $ul.parentNode
         var $child = $li.firstChild
         while ($child) {
