@@ -27,18 +27,22 @@
         return $parent.querySelectorAll(linkSel).length * 2 >= $headers.length
       })) return // there's already an outline in the document
 
+      var $container = document.createElement('div')
+      $container.classList.add('__github-markdown-outline-container')
+      if (options.float) $container.classList.add('__github-markdown-outline-container--float')
+
       var $outline = document.createElement('ul')
       $outline.classList.add('__github-markdown-outline')
-      if (options.float) $outline.classList.add('__github-markdown-outline--float')
-      var lastLevel = 1
+      $container.appendChild($outline)
+
+      // generate outline from headers
       $headers.forEach(function ($h) {
         var level = getHeaderLevel($h)
         if (!level) return
-        if (options.normalize) level = Math.min(level, lastLevel + 1)
         var $ul = $outline, $li, $child
         for (var l = 1; l < level; l++) {
-          $li = $ul.lastElementChild || $ul.appendChild(document.createElement('li'))
-          $child = $li.lastElementChild || {}
+          $li = $ul.lastChild || $ul.appendChild(document.createElement('li'))
+          $child = $li.lastChild || {}
           $ul = $child.tagName === 'UL'
             ? $child
             : $li.appendChild(document.createElement('ul'))
@@ -49,14 +53,31 @@
         if (options.useInnerHTML) {
           $topic.innerHTML = $h.innerHTML
           $child = $topic.querySelector(anchorSel)
-          if ($child) $topic.removeChild($child)
+          if ($child) $child.parentNode.removeChild($child)
         } else {
           $topic.innerText = $h.innerText
         }
         $topic.href = '#'+$h.querySelector(anchorSel).id
-        lastLevel = level
       })
-      $md.insertBefore($outline, $md.firstElementChild)
+
+      // find all sublists with one item and replace with contents
+      if (options.normalize) (function normalize ($ul) {
+        var $parent = $ul.parentNode
+        var $li = $ul.firstChild
+        var isLiOnlyChild = $li === $ul.lastChild && $ul !== $outline
+        while ($li) {
+          var $child = $li.firstChild
+          while ($child) {
+            if ($child.tagName === 'UL') normalize($child)
+            if (isLiOnlyChild) $parent.insertBefore($child, $ul.nextSibling) // inserts to end of list if $ul.nextSibling is null
+            $child = $child.nextSibling
+          }
+          if (isLiOnlyChild) $parent.removeChild($ul)
+          $li = $li.nextSibling
+        }
+      })($outline)
+
+      $md.insertBefore($container, $md.firstChild)
     })
   })
 }(this))
