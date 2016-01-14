@@ -28,7 +28,7 @@
       chrome.storage.sync.get({
         // default values
         useInnerHTML: true,
-        float: true,
+        float: false,
         hideIfOutlineDetected: true,
         normalize: true
       }, function (options) {

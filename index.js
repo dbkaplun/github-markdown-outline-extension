@@ -20,7 +20,7 @@
   root.chrome.storage.sync.get({
     // default values
     hideIfOutlineDetected: true,
-    float: true,
+    float: false,
     useInnerHTML: true,
     normalize: true
   }, function (options) {
