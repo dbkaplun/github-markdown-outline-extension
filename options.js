@@ -1,8 +1,8 @@
-(function (root) {
+(root => {
   var STATUS_SHOW_MS = 2000
   var document = root.document
 
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', () => {
     var $useInnerHTML = document.querySelector('[name="useInnerHTML"]')
     var $float = document.querySelector('[name="float"]')
     var $hideIfOutlineDetected = document.querySelector('[name="hideIfOutlineDetected"]')
@@ -17,10 +17,10 @@
         float: $float.checked,
         hideIfOutlineDetected: $hideIfOutlineDetected.checked,
         normalize: $normalize.checked
-      }, function () {
+      }, () => {
         $status.textContent = "Options saved."
         if (statusShowTimeout) clearTimeout(statusShowTimeout)
-        statusShowTimeout = setTimeout(function () { $status.textContent = initStatusTextContent }, STATUS_SHOW_MS)
+        statusShowTimeout = setTimeout(() => { $status.textContent = initStatusTextContent }, STATUS_SHOW_MS)
       })
     }
 
@@ -31,7 +31,7 @@
         float: false,
         hideIfOutlineDetected: true,
         normalize: true
-      }, function (options) {
+      }, options => {
         $useInnerHTML.checked = options.useInnerHTML
         $float.checked = options.float
         $hideIfOutlineDetected.checked = options.hideIfOutlineDetected
@@ -39,10 +39,10 @@
       })
     }
 
-    [$useInnerHTML, $float, $hideIfOutlineDetected, $normalize].forEach(function ($input) {
-      $input.addEventListener('change', function (evt) { saveOptions() })
+    [$useInnerHTML, $float, $hideIfOutlineDetected, $normalize].forEach($input => {
+      $input.addEventListener('change', evt => { saveOptions() })
     })
 
     restoreOptions()
   })
-}(this))
+})(this)

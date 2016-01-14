@@ -1,4 +1,4 @@
-(function (root) {
+(root => {
   var document = root.document
 
   getHeaderLevel.REGEXP = /h(\d)/i
@@ -19,13 +19,13 @@
     float: false,
     useInnerHTML: true,
     normalize: true
-  }, function (options) {
-    Array.from(document.querySelectorAll('.markdown-body')).forEach(function ($md) {
+  }, options => {
+    Array.from(document.querySelectorAll('.markdown-body')).forEach($md => {
       var $headers = Array.from($md.querySelectorAll(headerSel))
 
-      if (options.hideIfOutlineDetected && Array.from($md.querySelectorAll('p,ul')).some(function ($parent) {
-        return $parent.querySelectorAll(linkSel).length * 2 >= $headers.length
-      })) return // there's already an outline in the document
+      if (options.hideIfOutlineDetected && Array
+        .from($md.querySelectorAll('p,ul'))
+        .some($parent => $parent.querySelectorAll(linkSel).length * 2 >= $headers.length)) return // there's already an outline in the document
 
       var $container = document.createElement('div')
       $container.classList.add('__github-markdown-outline-container')
@@ -36,7 +36,7 @@
       $container.appendChild($outline)
 
       // generate outline from headers
-      $headers.forEach(function ($h) {
+      $headers.forEach($h => {
         var level = getHeaderLevel($h)
         if (!level) return
         var $ul = $outline, $li, $child
@@ -57,7 +57,7 @@
         } else {
           $topic.innerText = $h.innerText
         }
-        $topic.href = '#'+$h.querySelector(anchorSel).id
+        $topic.href = `#${$h.querySelector(anchorSel).id}`
       })
 
       // find all sublists with one item and replace with contents
@@ -80,4 +80,4 @@
       $md.insertBefore($container, $md.firstChild)
     })
   })
-}(this))
+})(this)
