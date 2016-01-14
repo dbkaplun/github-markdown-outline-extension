@@ -17,8 +17,7 @@
     // default values
     hideIfOutlineDetected: true,
     float: false,
-    useInnerHTML: true,
-    normalize: true
+    useInnerHTML: true
   }, options => {
     Array.from(document.querySelectorAll('.markdown-body')).forEach($md => {
       var $headers = Array.from($md.querySelectorAll(headerSel))
@@ -61,7 +60,7 @@
       })
 
       // find all sublists with one item and replace with contents
-      if (options.normalize) Array.from($container.querySelectorAll('ul')).forEach($ul => {
+      Array.from($container.querySelectorAll('ul')).forEach($ul => {
         var $li = $ul.firstChild
         if ($li !== $ul.lastChild || $li.lastChild.tagName !== 'UL') return
         var $parent = $ul.parentNode

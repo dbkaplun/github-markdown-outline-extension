@@ -15,8 +15,7 @@
       chrome.storage.sync.set({
         useInnerHTML: $useInnerHTML.checked,
         float: $float.checked,
-        hideIfOutlineDetected: $hideIfOutlineDetected.checked,
-        normalize: $normalize.checked
+        hideIfOutlineDetected: $hideIfOutlineDetected.checked
       }, () => {
         $status.textContent = "Options saved."
         if (statusShowTimeout) clearTimeout(statusShowTimeout)
@@ -29,8 +28,7 @@
         // default values
         useInnerHTML: true,
         float: false,
-        hideIfOutlineDetected: true,
-        normalize: true
+        hideIfOutlineDetected: true
       }, options => {
         $useInnerHTML.checked = options.useInnerHTML
         $float.checked = options.float
