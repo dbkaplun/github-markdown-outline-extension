@@ -51,8 +51,9 @@
           .appendChild(document.createElement('a'))
         if (options.useInnerHTML) {
           $topic.innerHTML = $h.innerHTML
-          $child = $topic.querySelector(anchorSel)
-          if ($child) $child.parentNode.removeChild($child)
+          Array.from($topic.querySelectorAll(anchorSel)).forEach($child => {
+            $child.parentNode.removeChild($child)
+          })
         } else {
           $topic.innerText = $h.innerText
         }
@@ -60,11 +61,11 @@
       })
 
       // find all sublists with one item and replace with contents
-      Array.from($container.querySelectorAll('ul')).forEach($ul => {
-        var $li = $ul.firstChild
-        if ($li !== $ul.lastChild || $li.lastChild.tagName !== 'UL') return
+      Array.from($container.querySelectorAll('ul')).reverse().forEach($ul => {
         var $parent = $ul.parentNode
+        var $li = $ul.firstChild
         var $child = $li.firstChild
+        if ($li !== $ul.lastChild || $child.tagName !== 'UL') return
         while ($child) {
           $parent.insertBefore($child, $ul.nextSibling) // inserts to end of list if $ul.nextSibling is null
           $child = $child.nextSibling
