@@ -61,7 +61,7 @@
       })
 
       // find all sublists with one item and replace with contents
-      Array.from($container.querySelectorAll('ul')).reverse().forEach($ul => {
+      Array.from($container.querySelectorAll('ul')).forEach($ul => {
         var $parent = $ul.parentNode
         var $li = $ul.firstChild
         var $child = $li.firstChild
